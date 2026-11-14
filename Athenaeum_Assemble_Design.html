@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Athenaeum — Learn with Direction. Grow with Purpose.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Plus+Jakarta+Sans:wght@500;600;700&family=Sora:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fef7ff;--ink:#0b1b3f;--muted:#45464e;--primary:#0051d5;--mid:#316bf3;--cyan:#4cd7f6;
+  --glass:rgba(255,255,255,.75);--card:rgba(255,255,255,.8);--solid:#fff;--line:#eaddff;--tab:rgba(244,234,255,.7);
+  --h1a:#0b1b3f;--h1c:#3f008e;--grid:rgba(0,81,213,.05);--ok-bg:rgba(16,185,129,.1);--ok-bd:rgba(16,185,129,.2);--ok:#065f46;
+  --shadow:0 24px 60px -12px rgba(11,27,63,.14),0 0 40px -5px rgba(76,215,246,.18);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0a1020;--ink:#e8ecf8;--muted:#a3abc2;--primary:#6c9bff;--glass:rgba(18,26,48,.75);--card:rgba(26,36,64,.8);
+  --solid:#101831;--line:#2b3556;--tab:rgba(26,36,66,.8);--h1a:#e8ecf8;--h1c:#c7a6ff;--grid:rgba(108,155,255,.07);
+  --ok-bg:rgba(16,185,129,.14);--ok-bd:rgba(16,185,129,.3);--ok:#6ee7b7;--shadow:0 24px 60px -12px rgba(0,0,0,.5)}}
+:root[data-theme="dark"]{
+  --bg:#0a1020;--ink:#e8ecf8;--muted:#a3abc2;--primary:#6c9bff;--glass:rgba(18,26,48,.75);--card:rgba(26,36,64,.8);
+  --solid:#101831;--line:#2b3556;--tab:rgba(26,36,66,.8);--h1a:#e8ecf8;--h1c:#c7a6ff;--grid:rgba(108,155,255,.07);
+  --ok-bg:rgba(16,185,129,.14);--ok-bd:rgba(16,185,129,.3);--ok:#6ee7b7;--shadow:0 24px 60px -12px rgba(0,0,0,.5)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 14px/1.5 Inter,system-ui,sans-serif;min-height:100vh;position:relative;overflow-x:hidden;
+  background-image:repeating-linear-gradient(30deg,transparent 0 46px,var(--grid) 46px 47px),repeating-linear-gradient(150deg,transparent 0 46px,var(--grid) 46px 47px)}
+body::before,body::after{content:"";position:fixed;border-radius:50%;filter:blur(64px);pointer-events:none;z-index:0}
+body::before{width:384px;height:384px;left:-128px;top:-128px;background:rgba(0,81,213,.1)}
+body::after{width:512px;height:512px;right:-128px;bottom:-128px;background:rgba(76,215,246,.2)}
+.page{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between}
+.pj{font-family:"Plus Jakarta Sans",sans-serif}.sora{font-family:Sora,sans-serif}
+svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* header */
+header{background:rgba(255,255,255,.4);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.6)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header{background:rgba(10,16,32,.5);border-color:var(--line)}}
+.bar{max-width:1280px;margin:auto;height:64px;padding:0 clamp(16px,3.2vw,40px);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font:700 18px/28px Sora,sans-serif;letter-spacing:-.45px}
+.logo b{color:var(--primary);font-weight:700}
+.mark{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:14px;
+  background:linear-gradient(135deg,#0051d5,#316bf3 50%,#0b1b3f);filter:drop-shadow(0 4px 7px rgba(0,81,213,.3))}
+.nav{display:flex;align-items:center;gap:16px}
+.pill{display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:var(--card);border:1px solid var(--solid);
+  box-shadow:0 1px 2px rgba(0,0,0,.05);font:600 11px/24px "Plus Jakarta Sans",sans-serif;letter-spacing:.55px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.pill.link{padding:9px 17px;font-size:12px;line-height:16px;letter-spacing:-.08px;text-transform:none;color:var(--ink);text-decoration:none;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--primary);position:relative}
+.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--primary);opacity:.6;animation:ping 1.6s infinite}
+@keyframes ping{to{transform:scale(2.4);opacity:0}}
+
+/* main shell */
+main{display:flex;justify-content:center;padding:48px 24px}
+.shell{width:100%;max-width:1152px;position:relative;overflow:hidden;background:var(--glass);backdrop-filter:blur(24px);
+  border:1px solid var(--solid);border-radius:24px;box-shadow:var(--shadow);padding:49px}
+.shell::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,#0051d5,#4cd7f6,#316bf3)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:48px;align-items:center}
+.left{grid-column:span 7;display:flex;flex-direction:column;gap:16px;align-self:stretch;justify-content:space-between}
+.right{grid-column:8/span 5}
+
+.badge{align-self:flex-start;display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:rgba(0,81,213,.1);
+  border:1px solid rgba(0,81,213,.2);color:var(--primary);font:700 11px/24px "Plus Jakarta Sans",sans-serif;letter-spacing:1.1px;text-transform:uppercase}
+h1{font:700 clamp(32px,4.4vw,42.4px)/.95 Sora,sans-serif;letter-spacing:-1.06px}
+h1 span{display:block;background:linear-gradient(90deg,var(--h1a),var(--primary) 50%,var(--h1c));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:512px;color:var(--muted);font-size:16px;line-height:24px;letter-spacing:-.08px}
+
+/* skill cards */
+.stack{position:relative;display:flex;flex-direction:column;gap:12px;max-width:576px;margin-top:28px;padding-top:20px}
+.float{position:absolute;right:-8px;top:-24px;display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:16px;
+  background:linear-gradient(161deg,rgba(255,255,255,.9),rgba(239,227,255,.8));border:1px solid #fff;backdrop-filter:blur(12px);
+  box-shadow:0 10px 25px rgba(0,81,213,.12);z-index:2}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .float{background:linear-gradient(161deg,rgba(30,42,76,.95),rgba(50,40,90,.85));border-color:var(--line)}}
+.float .ic{width:28px;height:28px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:13px;background:linear-gradient(45deg,#0051d5,#4cd7f6)}
+.float small{display:block;color:var(--primary);font:700 10px/12px "Plus Jakarta Sans",sans-serif;text-transform:uppercase}
+.float strong{display:block;font:600 12px/16px "Plus Jakarta Sans",sans-serif}
+.skill{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:17px;border-radius:16px;background:var(--card);
+  border:1px solid rgba(255,255,255,.9);backdrop-filter:blur(12px);box-shadow:0 8px 20px -4px rgba(11,27,63,.06)}
+.sk-l{display:flex;align-items:center;gap:14px;min-width:0}
+.sk-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:16px;flex:none;border:1px solid}
+.sk-t{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sk-t h3{font:700 16px/24px Sora,sans-serif;letter-spacing:-.08px}
+.tag{padding:3px 9px;border-radius:999px;border:1px solid;font:600 10px/16px "Plus Jakarta Sans",sans-serif}
+.sk-d{color:var(--muted);font-size:12px;line-height:16px;margin-top:5px}
+.ring{display:flex;align-items:center;gap:10px;font:600 12px/16px "Plus Jakarta Sans",sans-serif}
+.ring div{position:relative;width:36px;height:36px}
+.ring svg{width:36px;height:36px;transform:rotate(-90deg)}
+.ring em{position:absolute;inset:0;display:grid;place-items:center;font:600 10px Inter,sans-serif;font-style:normal}
+.t-amber{--c:245,158,11;color:#d97706}.t-blue{--c:0,81,213;color:var(--primary)}.t-cyan{--c:6,182,212;color:#0092ab}
+.sk-ic{background:linear-gradient(135deg,rgba(var(--c),.1),rgba(var(--c),.2));border-color:rgba(var(--c),.3)}
+
+/* social proof */
+.proof{margin-top:24px;padding-top:9px;border-top:1px solid rgba(234,221,255,.6);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.av{display:flex}.av i{width:32px;height:32px;border-radius:50%;border:2px solid #fff;margin-right:-10px;display:grid;place-items:center;color:#fff;font:700 10px Inter,sans-serif;font-style:normal}
+.av i:last-child{background:var(--primary);margin-right:0}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:12px}
+.proof b{font:700 12px "Plus Jakarta Sans",sans-serif;margin-left:6px}
+.proof p{color:var(--muted);font-size:12px;line-height:16px}
+
+/* auth panel */
+.panel{background:var(--card);backdrop-filter:blur(40px);border:1px solid var(--solid);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px;
+  box-shadow:0 16px 40px -8px rgba(11,27,63,.12),0 0 20px rgba(255,255,255,.8)}
+.tabs{display:flex;padding:4px;border-radius:12px;background:var(--tab)}
+.tabs button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px;border:0;border-radius:8px;background:none;cursor:pointer;
+  font:500 12px/16px "Plus Jakarta Sans",sans-serif;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--solid);color:var(--primary);font-weight:600;filter:drop-shadow(0 2px 4px rgba(0,0,0,.06))}
+.sso{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:12px;background:var(--solid);border:1px solid var(--line);cursor:pointer;
+  font:600 12px/16px "Plus Jakarta Sans",sans-serif;color:var(--ink)}
+.or{position:relative;text-align:center;border-top:1px solid var(--line);margin:4px 0 0}
+.or span{position:relative;top:-12px;padding:0 10px;background:var(--solid);color:var(--muted);font:500 10px/24px "Plus Jakarta Sans",sans-serif;letter-spacing:.5px;text-transform:uppercase}
+.status{display:flex;align-items:center;gap:8px;padding:9px 13px;border-radius:12px;background:var(--ok-bg);border:1px solid var(--ok-bd);color:var(--ok);font:600 11px/16px "Plus Jakarta Sans",sans-serif}
+form{display:flex;flex-direction:column;gap:12px}
+.f label{display:flex;justify-content:space-between;align-items:center;font:600 12px/16px "Plus Jakarta Sans",sans-serif;margin-bottom:4px}
+.f label small{color:var(--primary);font-size:10px;line-height:24px}
+.in{position:relative}
+.in svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--muted)}
+.in input{width:100%;padding:9px 12px 9px 37px;border-radius:12px;border:1px solid var(--line);background:var(--solid);color:var(--ink);font:400 12px/16px Inter,sans-serif;outline:0}
+.in input:focus{border-color:rgba(0,81,213,.5);box-shadow:0 0 0 1px rgba(0,81,213,.2),0 0 10px rgba(0,81,213,.08)}
+.cta{margin-top:4px;padding:12px 16px;border:0;border-radius:12px;color:#fff;cursor:pointer;font:700 12px/16px "Plus Jakarta Sans",sans-serif;
+  background:linear-gradient(90deg,#0051d5,#316bf3 50%,#0b1b3f);filter:drop-shadow(0 8px 10px rgba(0,81,213,.32))}
+.demo{margin-top:2px;padding-top:13px;border-top:1px solid rgba(234,221,255,.7)}
+.demo a{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 15px;border-radius:999px;text-decoration:none;color:var(--ink);
+  border:1px solid rgba(0,81,213,.3);background:linear-gradient(90deg,rgba(239,227,255,.9),rgba(244,234,255,.8));font:600 12px/16px "Plus Jakarta Sans",sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .demo a{background:linear-gradient(90deg,rgba(40,50,92,.9),rgba(30,40,72,.8))}}
+.demo em{font:700 9px/16px "Plus Jakarta Sans",sans-serif;font-style:normal;letter-spacing:.45px;text-transform:uppercase;background:var(--primary);color:#fff;padding:2px 6px;border-radius:4px;margin-right:8px}
+.micro{text-align:center;display:flex;flex-direction:column;gap:6px}
+.micro p:first-child{font:500 12px/16px "Plus Jakarta Sans",sans-serif}
+.micro a{color:var(--primary);font-weight:700;text-decoration:none}
+.micro small{color:var(--muted);font-size:10px;line-height:12.5px}.micro small u{cursor:pointer}
+footer{padding:16px;text-align:center;color:var(--muted);font:500 12px/16px "Plus Jakarta Sans",sans-serif}
+
+/* responsive */
+@media (max-width:960px){
+  main{padding:32px 16px}.shell{padding:28px 20px}
+  .grid{grid-template-columns:1fr;gap:32px}.left,.right{grid-column:1/-1}
+  .float{position:static;align-self:flex-end;margin:-8px 0 4px}.stack{margin-top:8px;padding-top:0}
+}
+@media (max-width:560px){
+  .pill:not(.link){display:none}.shell{border-radius:20px}.sso{grid-template-columns:1fr}
+  .skill{padding:14px}.ring{margin-left:54px}.panel{padding:18px}
+}
+
+/* ===== app shell ===== */
+#app{display:grid;grid-template-columns:288px minmax(0,1fr);min-height:100vh;position:relative;z-index:1}
+#app[hidden],#home[hidden]{display:none}
+.side{background:var(--glass);backdrop-filter:blur(20px);border-right:1px solid var(--line);padding:16px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;gap:10px;align-items:center;padding:4px 4px 16px;text-decoration:none;color:var(--ink);font:700 16px/1.2 Sora,sans-serif}
+.brand small{display:block;font:500 10px "Plus Jakarta Sans",sans-serif;color:var(--muted)}
+.side h6{font:600 10px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:1px;color:var(--muted);margin:6px 4px 10px}
+.side nav{display:flex;flex-direction:column;gap:2px}
+.side nav a{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:10px;color:var(--muted);text-decoration:none;font:500 12px/16px "Plus Jakarta Sans",sans-serif}
+.side nav a.on{background:#0b1b3f;color:#fff;font-weight:700}
+.side nav a:hover:not(.on){background:var(--tab)}
+.side .foot{margin-top:auto;padding-top:16px;font:500 11px "Plus Jakarta Sans",sans-serif;color:var(--muted)}
+.foot .ag{display:flex;gap:6px;align-items:center;background:var(--tab);padding:8px 12px;border-radius:999px}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 24px;background:rgba(255,255,255,.4);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top input{flex:1;min-width:160px;max-width:326px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--solid);color:var(--ink);font:400 12px Inter,sans-serif}
+.top .sp{flex:1}.who{display:flex;gap:10px;align-items:center;font:700 11px/1.2 "Plus Jakarta Sans",sans-serif}
+.who i{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#0051d5,#4cd7f6);color:#fff;display:grid;place-items:center;font-style:normal;font-size:12px}
+.who small{display:block;color:var(--primary);font-weight:500}
+.view{padding:24px;display:flex;flex-direction:column;gap:20px;max-width:1100px;width:100%}
+.view h2{font:700 24px/1.2 Sora,sans-serif;letter-spacing:-.5px}.view .sub{color:var(--muted);margin-top:4px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.cd{background:var(--card);border:1px solid var(--solid);border-radius:20px;padding:20px;box-shadow:0 8px 20px -4px rgba(11,27,63,.08);display:flex;flex-direction:column;gap:12px}
+.cd h3{font:700 16px/1.3 Sora,sans-serif}.cd .k{font:600 10px "Plus Jakarta Sans",sans-serif;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+.cd.navy{background:linear-gradient(135deg,#0b1b3f,#14306e);color:#fff;border-color:transparent}.navy p{color:#b9c4e6}
+.span2{grid-column:span 2}@media(max-width:700px){.span2{grid-column:auto}}
+.banner{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:16px 20px;border-radius:16px;border-left:6px solid var(--primary);background:linear-gradient(90deg,rgba(76,215,246,.18),rgba(0,81,213,.06))}
+.btn2{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:12px;border:0;cursor:pointer;color:#fff;text-decoration:none;font:700 13px "Plus Jakarta Sans",sans-serif;background:linear-gradient(90deg,#0051d5,#316bf3)}
+.btn2.ghost{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center;font:600 12px "Plus Jakarta Sans",sans-serif}
+.pb{height:6px;border-radius:9px;background:var(--line);overflow:hidden;margin:4px 0 10px}.pb i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#0051d5,#4cd7f6)}
+.pb.r i{background:#dc2626}.pb.g i{background:#059669}
+.big{width:150px;height:150px;border-radius:50%;margin:auto;display:grid;place-items:center;background:conic-gradient(var(--primary) calc(var(--v)*1%),var(--line) 0)}
+.big div{width:118px;height:118px;border-radius:50%;background:var(--solid);display:grid;place-items:center;text-align:center;font:700 32px Sora,sans-serif}.big small{font:600 9px "Plus Jakarta Sans",sans-serif;color:var(--muted);display:block}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.tiles div{background:var(--tab);border-radius:12px;padding:10px;text-align:center;font:700 18px Sora,sans-serif}.tiles small{display:block;font:500 10px "Plus Jakarta Sans",sans-serif;color:var(--muted)}
+.chip{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--tab);font:600 11px "Plus Jakarta Sans",sans-serif;margin:2px}
+.li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}.li:first-child{border:0}.li b{display:block;font:700 13px "Plus Jakarta Sans",sans-serif}.li span{color:var(--muted);font-size:12px}.li em{margin-left:auto;font:600 11px "Plus Jakarta Sans",sans-serif;font-style:normal;color:var(--primary);white-space:nowrap}
+.chat{display:flex;flex-direction:column;gap:10px;min-height:260px}.msg{max-width:80%;padding:10px 14px;border-radius:14px;background:var(--tab);font-size:13px}.msg.me{align-self:flex-end;background:var(--primary);color:#fff}
+.send{display:flex;gap:8px}.send input{flex:1;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--solid);color:var(--ink)}
+@media(max-width:900px){
+ #app{grid-template-columns:1fr}.side{position:static;height:auto;flex-direction:column;padding:10px 12px}
+ .side h6,.side .foot{display:none}.side nav{flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:4px}.side nav a{white-space:nowrap}.brand{padding-bottom:8px}
+ .view{padding:16px}.top{padding:10px 16px}}
+
+/* ===== ATHENAEUM DESIGN SYSTEM ===== */
+:root{
+  --bg:#f5f3ee;--ink:#202b27;--muted:#68736d;--primary:#315b4c;--mid:#527967;--cyan:#b7cbbd;
+  --glass:rgba(255,255,255,.88);--card:#fff;--solid:#fff;--line:#e4e7df;--tab:#f0f2ec;
+  --h1a:#1e3029;--h1c:#557c68;--grid:rgba(49,91,76,.035);
+  --ok-bg:#edf5ef;--ok-bd:#d4e7d8;--ok:#315b4c;
+  --shadow:0 18px 55px -28px rgba(31,48,40,.28);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151c19;--ink:#edf2ed;--muted:#aab7ae;--primary:#9bbca7;--mid:#779c86;--cyan:#557967;
+  --glass:rgba(30,40,34,.94);--card:#222e27;--solid:#202a24;--line:#35443a;--tab:#29362e;
+  --h1a:#edf2ed;--h1c:#b7d2bf;--grid:rgba(180,210,190,.035);
+  --ok-bg:#263b2d;--ok-bd:#3a5844;--ok:#b7d9c0;--shadow:0 18px 55px -28px rgba(0,0,0,.65)
+}}
+:root[data-theme="dark"]{
+  --bg:#151c19;--ink:#edf2ed;--muted:#aab7ae;--primary:#9bbca7;--mid:#779c86;--cyan:#557967;
+  --glass:rgba(30,40,34,.94);--card:#222e27;--solid:#202a24;--line:#35443a;--tab:#29362e;
+  --h1a:#edf2ed;--h1c:#b7d2bf;--grid:rgba(180,210,190,.035);
+  --ok-bg:#263b2d;--ok-bd:#3a5844;--ok:#b7d9c0;--shadow:0 18px 55px -28px rgba(0,0,0,.65)
+}
+body{
+  background:var(--bg);color:var(--ink);
+  background-image:radial-gradient(circle at 8% 5%,rgba(183,203,189,.22),transparent 28%),
+                   radial-gradient(circle at 92% 90%,rgba(183,203,189,.16),transparent 30%);
+  font-family:Inter,system-ui,sans-serif;
+}
+body::before,body::after{display:none}
+.pj,.logo,.brand,.view h2,.cd h3,h1,.sk-t h3{font-family:"Plus Jakarta Sans",Inter,sans-serif}
+header{background:rgba(250,250,247,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) header{background:rgba(21,28,25,.88)}}
+.bar{height:72px}
+.logo{font-size:19px;letter-spacing:-.7px}
+.logo b{color:var(--primary)}
+.mark{width:38px;height:38px;border-radius:13px;background:var(--primary);filter:none}
+main{padding:42px 24px}
+.shell{max-width:1200px;background:var(--glass);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:clamp(24px,4vw,52px);backdrop-filter:blur(18px)}
+.shell::before{height:3px;background:linear-gradient(90deg,#315b4c,#9bbca7,#d9e4d8)}
+.grid{gap:clamp(28px,4vw,56px)}
+.badge{background:#edf3ed;border:1px solid #dbe7dc;color:#315b4c;letter-spacing:.7px}
+h1{font-size:clamp(34px,4.6vw,52px);line-height:1.06;letter-spacing:-1.8px}
+h1 span{background:none;color:var(--primary)}
+.lead{font-size:15px;line-height:1.8;max-width:540px}
+.stack{gap:12px}
+.float{background:#fff;border:1px solid var(--line);box-shadow:0 8px 24px rgba(31,48,40,.08)}
+.float .ic{background:var(--primary)}
+.skill{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 5px 18px rgba(31,48,40,.035)}
+.sk-ic{border-radius:12px}
+.proof{border-color:var(--line)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 14px 35px rgba(31,48,40,.08);padding:26px}
+.tabs{background:var(--tab)}
+.tabs button[aria-selected=true]{color:var(--primary);filter:none}
+.btn{border-color:var(--line);border-radius:10px}
+.status{border-radius:10px}
+.in input{border-radius:10px}
+.in input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(49,91,76,.10)}
+.cta,.btn2{background:var(--primary);border-radius:10px;filter:none;box-shadow:none}
+.cta:hover,.btn2:hover{background:#25483b}
+.demo a{border-color:#d4e2d6;background:#f1f5f0;border-radius:10px}
+footer{color:var(--muted)}
+#app{grid-template-columns:258px minmax(0,1fr);background:var(--bg)}
+.side{background:#202f28;color:#f3f5f1;border:0;padding:22px 16px}
+.side .brand{color:#f3f5f1;padding:4px 8px 28px}
+.side .brand small{color:#b9c9be}
+.side h6{color:#9eb3a4;padding-left:10px;letter-spacing:1.3px}
+.side nav a{color:#c4d0c7;border-radius:9px;padding:11px 12px}
+.side nav a.on{background:#3d5e4c;color:#fff}
+.side nav a:hover:not(.on){background:rgba(255,255,255,.08)}
+.side .foot{color:#c4d0c7}
+.foot .ag{background:rgba(255,255,255,.08)}
+.top{background:var(--card);border-color:var(--line);padding:14px 26px}
+.top input{border-radius:9px}
+.pill{background:var(--tab);border:1px solid var(--line);box-shadow:none}
+.who i{background:var(--primary)}
+.view{max-width:1250px;padding:28px}
+.view h2{font-size:26px;letter-spacing:-.8px}
+.cd{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 5px 20px rgba(31,48,40,.035);padding:22px}
+.cd.navy{background:#263d32;color:#fff;border:0}
+.navy p{color:#c4d4c9}
+.banner{border:1px solid #dce7dd;border-left:4px solid var(--primary);border-radius:13px;background:#edf3ed}
+.pb{background:var(--tab)}
+.pb i{background:var(--primary)}
+.pb.r i{background:#c47b61}.pb.g i{background:#668d70}
+.big{background:conic-gradient(var(--primary) calc(var(--v)*1%),var(--line) 0)}
+.tiles div{background:var(--tab);border:1px solid var(--line);border-radius:10px}
+.chip{background:var(--tab);border:1px solid var(--line);border-radius:7px}
+.li{border-color:var(--line)}
+.msg{background:var(--tab)}
+.msg.me{background:var(--primary)}
+.send input{border-radius:10px}
+@media(max-width:900px){
+  #app{grid-template-columns:1fr}
+  .side{background:#202f28}
+  .side nav{padding-bottom:7px}
+  .side nav a{font-size:11px}
+  .view{padding:18px}
+  .top{padding:12px 16px}
+}
+@media(max-width:560px){
+  main{padding:18px 12px}
+  .shell{padding:22px 16px;border-radius:16px}
+  .panel{padding:18px}
+  .proof{align-items:flex-start}
+  .top .pill{display:none}
+}
+
+
+/* ATHENAEUM — Assemble-inspired editorial redesign */
+:root{
+  --bg:#fbfaf9;--ink:#282321;--muted:#817774;--primary:#65544f;--mid:#8c746d;
+  --cyan:#c6aaa2;--glass:rgba(255,255,255,.92);--card:#fff;--solid:#fff;
+  --line:#e9dfdc;--tab:#f5efed;--h1a:#fff;--h1c:#fff;--grid:transparent;
+  --shadow:0 18px 55px rgba(62,44,39,.08);
+}
+body{
+  background:#fbfaf9;color:#282321;
+  background-image:none;font-family:Inter,Arial,sans-serif;
+}
+body::before,body::after{display:none}
+.page{display:block;min-height:100vh}
+#home>header{
+  position:absolute;z-index:5;top:0;left:0;right:0;
+  background:transparent;border:0;backdrop-filter:none;
+}
+.bar{max-width:none;height:88px;padding:0 clamp(22px,4vw,64px)}
+.logo{color:#fff;font:500 18px/1 Inter,sans-serif;letter-spacing:3px}
+.logo .mark{display:none}
+.nav{gap:26px}
+.nav .pill:first-child{display:none}
+.nav .pill.link{
+  color:#fff;background:transparent;border:0;box-shadow:none;
+  text-transform:uppercase;letter-spacing:1.5px;font-size:11px;
+}
+main{display:block;padding:0}
+.shell{
+  width:100%;max-width:none;min-height:530px;padding:145px 5vw 74px;
+  border:0;border-radius:0;box-shadow:none;backdrop-filter:none;
+  background:
+    radial-gradient(ellipse at 10% 62%,rgba(255,255,255,.12),transparent 28%),
+    linear-gradient(112deg,#b9958b 0%,#d5bbb4 48%,#c7a69e 100%);
+  overflow:hidden;position:relative;
+}
+.shell::before{display:none}
+.shell::after{
+  content:"";position:absolute;left:-4%;bottom:-105px;width:36%;height:290px;
+  background:linear-gradient(145deg,#8d7068,#a17d73);
+  transform:skewY(-9deg);box-shadow:0 -12px 35px rgba(67,45,40,.12);
+}
+.grid{display:flex;flex-direction:column;gap:0;position:relative;z-index:1}
+.left{width:100%;align-items:center;text-align:center;gap:0}
+.left>div:first-child{align-items:center;gap:22px}
+.badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;
+  letter-spacing:2px;font-size:10px}
+h1{
+  color:#fff;font:400 clamp(48px,9vw,108px)/1.05 Inter,Arial,sans-serif;
+  letter-spacing:clamp(2px,1vw,10px);text-align:center;
+}
+h1 span{display:inline;background:none;color:#fff}
+.lead{max-width:620px;color:rgba(255,255,255,.9);font-size:16px;line-height:1.8}
+.stack{display:none}
+.proof{display:none}
+.right{width:min(100%,560px);margin:48px auto 0}
+.panel{
+  background:rgba(255,255,255,.96);border:1px solid rgba(255,255,255,.8);
+  border-radius:3px;padding:30px;box-shadow:0 18px 55px rgba(58,40,35,.12);
+}
+.tabs{background:#f5efed;border-radius:2px}
+.tabs button{border-radius:2px}
+.tabs button[aria-selected="true"]{background:#65544f;color:white}
+.btn,.btn2{border-radius:2px}
+.cta{
+  background:#51443f;border:1px solid #51443f;border-radius:0;
+  color:#fff;text-transform:uppercase;letter-spacing:2px;font-size:11px;
+  padding:16px 20px;box-shadow:none;
+}
+.cta:hover{background:#352c29}
+.in{border-radius:2px;background:#fff;border:1px solid #e5dcd9}
+.in input{color:#282321}
+.status{border-radius:2px}
+.demo a{border-radius:2px}
+.micro a{color:#65544f}
+footer{
+  background:#fbfaf9;color:#948984;text-align:center;
+  padding:24px 16px;font-size:10px;letter-spacing:2px;
+}
+.athena-showcase{background:#fbfaf9;padding:86px 24px 100px;text-align:center}
+.showcase-inner{max-width:1040px;margin:auto}
+.eyebrow{font-size:10px;letter-spacing:2.6px;color:#a28e87;font-weight:700;margin-bottom:16px}
+.athena-showcase h2{font:400 clamp(30px,4vw,44px)/1.2 Inter,Arial,sans-serif;color:#302927;letter-spacing:-1.2px}
+.showcase-copy{color:#918581;max-width:580px;margin:18px auto 48px;line-height:1.8}
+.showcase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:left}
+.showcase-grid article{background:#fff;border:1px solid #eee6e3;padding:28px 26px;min-height:170px}
+.showcase-grid article>span{font-size:10px;letter-spacing:2px;color:#b08e83}
+.showcase-grid h3{font:600 17px/1.4 Inter,sans-serif;margin:18px 0 8px;color:#403632}
+.showcase-grid p{font-size:13px;line-height:1.7;color:#918581}
+#app{background:#f8f5f3;color:#302927}
+.side{background:#403632}
+.side nav a.on{background:#705d56}
+.top{background:#fff}
+.cd{border-radius:3px}
+.cd.navy{background:#51443f}
+.banner{background:#f2e9e5;border-color:#e6d7d1;border-left-color:#8e7167}
+.pb i{background:#8d7168}
+.big{background:conic-gradient(#8d7168 calc(var(--v)*1%),#eee5e1 0)}
+.who i{background:#8d7168}
+.btn2{background:#65544f}
+.btn2.ghost{background:#f4eeeb;color:#65544f}
+@media(max-width:900px){
+  .bar{height:76px}
+  .nav{gap:8px}
+  .shell{min-height:500px;padding:130px 22px 54px}
+  .right{margin-top:38px}
+}
+@media(max-width:600px){
+  .bar{height:68px;padding:0 18px}
+  .logo{font-size:14px;letter-spacing:2px}
+  .nav .pill.link{font-size:9px;letter-spacing:1px;padding:8px}
+  .shell{padding:116px 16px 38px;min-height:450px}
+  .badge{font-size:8px;letter-spacing:1.2px}
+  h1{font-size:clamp(42px,13vw,64px);letter-spacing:2px}
+  .lead{font-size:14px}
+  .right{margin-top:30px}
+  .panel{padding:20px 16px}
+  .athena-showcase{padding:62px 18px}
+  .showcase-grid{grid-template-columns:1fr;gap:12px}
+  .showcase-grid article{min-height:0}
+}
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></symbol>
+  <symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></symbol>
+  <symbol id="at" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 006 0v-1a10 10 0 10-4 8"/></symbol>
+  <symbol id="phone" viewBox="0 0 24 24"><path d="M22 17v3a2 2 0 01-2.2 2A19.8 19.8 0 012 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7A2 2 0 0122 17z"/></symbol>
+  <symbol id="login" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3"/></symbol>
+  <symbol id="plus" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0114 0M19 8v6M16 11h6"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></symbol>
+  <symbol id="arrow-r" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="arrow-l" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="code" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 10l3 2-3 2M13 15h4"/></symbol>
+  <symbol id="db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+  <symbol id="cube" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></symbol>
+</svg>
+
+<div class="page" id="home">
+  <header>
+    <div class="bar">
+      <a class="logo" href="#home"><span class="mark"><svg class="i"><use href="#cube"/></svg></span><span>ATHENAEUM</span></a>
+      <div class="nav">
+        <span class="pill"><span class="dot"></span>Your learning space</span>
+        <a class="pill link" href="#"><svg class="i" style="width:11px;height:11px"><use href="#arrow-l"/></svg>Back to Home</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="shell">
+      <div class="grid">
+        <section class="left">
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <span class="badge"><svg class="i" style="width:13px;height:13px"><use href="#spark"/></svg>PERSONALIZED LEARNING, REIMAGINED</span>
+            <h1>ATHENAEUM</h1>
+            <p class="lead">A more thoughtful way to learn, discover your strengths, and build a clear path toward the future you want.</p>
+          </div>
+
+          <div class="stack">
+            <div class="float"><span class="ic"><svg class="i"><use href="#cube"/></svg></span><span><small>Athenaeum</small><strong>Learning Intelligence</strong></span></div>
+
+            <article class="skill t-amber">
+              <div class="sk-l"><span class="sk-ic"><svg class="i"><use href="#code"/></svg></span>
+                <div><div class="sk-t"><h3 style="color:var(--ink)">Python Engineering</h3><span class="tag" style="background:#ecfdf5;border-color:#a7f3d0;color:#047857">Advanced</span></div>
+                <p class="sk-d">Data Structures, FastAPIs &amp; PyTorch Inference</p></div></div>
+              <div class="ring" style="color:var(--ink)"><div><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--line)" stroke-width="3"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="#0051d5" stroke-width="3" stroke-linecap="round" stroke-dasharray="89.6 97.4"/></svg><em style="color:var(--primary)">92%</em></div>Mastery</div>
+            </article>
+
+            <article class="skill t-blue">
+              <div class="sk-l"><span class="sk-ic"><svg class="i"><use href="#db"/></svg></span>
+                <div><div class="sk-t"><h3 style="color:var(--ink)">SQL &amp; Relational Schema</h3><span class="tag" style="background:#eff6ff;border-color:rgba(0,81,213,.2);color:#0051d5">Verified</span></div>
+                <p class="sk-d">PostgreSQL, Index Optimization &amp; Sharding</p></div></div>
+              <div class="ring" style="color:var(--ink)"><div><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--line)" stroke-width="3"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="#0051d5" stroke-width="3" stroke-linecap="round" stroke-dasharray="85.7 97.4"/></svg><em style="color:var(--primary)">88%</em></div>Validated</div>
+            </article>
+
+            <article class="skill t-cyan">
+              <div class="sk-l"><span class="sk-ic"><svg class="i"><use href="#cube"/></svg></span>
+                <div><div class="sk-t"><h3 style="color:var(--ink)">React 19 &amp; Architecture</h3><span class="tag" style="background:#fffbeb;border-color:#fde68a;color:#b45309">In Progress</span></div>
+                <p class="sk-d">Server Components &amp; Concurrent State Engine</p></div></div>
+              <div class="ring" style="color:var(--ink)"><div><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--line)" stroke-width="3"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" stroke-dasharray="63.3 97.4"/></svg><em>65%</em></div>Synthesis</div>
+            </article>
+          </div>
+
+          <div class="proof">
+            <div class="av"><i style="background:#8b5cf6">S</i><i style="background:#06b6d4">M</i><i style="background:#f59e0b">B</i><i>+14k</i></div>
+            <div><span class="stars">★★★★★</span><b>4.9 / 5</b><p>A focused space to understand your strengths and keep growing</p></div>
+          </div>
+        </section>
+
+        <aside class="right">
+          <div class="panel">
+            <div class="tabs" role="tablist">
+              <button role="tab" aria-selected="true" data-mode="in"><svg class="i" style="width:11px;height:11px"><use href="#login"/></svg>Sign In</button>
+              <button role="tab" aria-selected="false" data-mode="up"><svg class="i" style="width:13px;height:13px"><use href="#plus"/></svg>Create Account</button>
+            </div>
+            <div class="sso">
+              <button class="btn" type="button"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>GitHub</button>
+              <button class="btn" type="button"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="#4285f4" d="M22 12.200c0-.7-.1-1.400-.2-2H12v3.900h5.600a4.800 4.800 0 01-2.100 3.100v2.600h3.400c2-1.800 3.100-4.500 3.100-7.600z"/><path fill="#34a853" d="M12 22.500c2.800 0 5.200-.9 6.900-2.500l-3.400-2.600c-.9.600-2.100 1-3.500 1a6.200 6.200 0 01-5.800-4.300H2.700v2.700A10.500 10.500 0 0012 22.500z"/><path fill="#fbbc05" d="M6.200 14.100a6.300 6.300 0 010-4.200V7.200H2.700a10.500 10.500 0 000 9.600z"/><path fill="#ea4335" d="M12 5.800c1.500 0 2.900.5 4 1.600l3-3A10.500 10.500 0 002.700 7.200l3.500 2.700A6.200 6.200 0 0112 5.800z"/></svg>Google</button>
+            </div>
+            <div class="or"><span>or continue with your account</span></div>
+            <div class="status" id="status" role="status"><svg class="i" style="width:15px;height:15px"><use href="#check"/></svg><span>Your learning workspace is ready.</span></div>
+
+            <form id="auth" novalidate>
+              <div class="f"><label for="name">Full Name</label>
+                <div class="in"><svg class="i"><use href="#user"/></svg><input id="name" name="name" type="text" autocomplete="name" placeholder="Arjun Sharma" required></div></div>
+              <div class="f"><label for="email">Email address <small>SSO Auto-Detect</small></label>
+                <div class="in"><svg class="i"><use href="#at"/></svg><input id="email" name="email" type="email" autocomplete="email" placeholder="arjun.sharma@stanford.edu" required></div></div>
+              <div class="f"><label for="phone">Phone Number</label>
+                <div class="in"><svg class="i"><use href="#phone"/></svg><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+91 98765 43210" required></div></div>
+              <button class="cta" id="cta" type="submit">Sign in to Athenaeum</button>
+            </form>
+
+            <div class="demo"><a href="#dashboard"><span><em>Recruiter</em>Explore the demo workspace</span><svg class="i" style="width:11px;height:11px"><use href="#arrow-r"/></svg></a></div>
+            <div class="micro">
+              <p>Don’t have an account? <a href="#" id="swap">Create one free</a></p>
+              <small>Your learning journey, in one place. <u>Terms</u> &amp; <u>Privacy</u>.</small>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+
+  <section class="athena-showcase" aria-label="Athenaeum learning features">
+    <div class="showcase-inner">
+      <p class="eyebrow">LEARN WITH INTENTION</p>
+      <h2>A clearer path to your next chapter.</h2>
+      <p class="showcase-copy">Explore a learning space built around your skills, ambitions, and progress.</p>
+      <div class="showcase-grid">
+        <article><span>01</span><h3>Understand your skills</h3><p>See your strengths and identify the skills to build next.</p></article>
+        <article><span>02</span><h3>Find your direction</h3><p>Discover career paths that align with your abilities and goals.</p></article>
+        <article><span>03</span><h3>Make steady progress</h3><p>Follow a personalized roadmap and track every milestone.</p></article>
+      </div>
+    </div>
+  </section>
+  <footer>ATHENAEUM · YOUR LEARNING JOURNEY, IN ONE PLACE</footer>
+</div>
+
+<script>
+function sessionStorageSafe(n){window.__user=n}
+(function(){
+  var tabs=document.querySelectorAll('[data-mode]'),cta=document.getElementById('cta'),
+      swap=document.getElementById('swap'),form=document.getElementById('auth'),st=document.querySelector('#status span');
+  function mode(m){
+    tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.mode===m)});
+    cta.textContent=m==='in'?'Sign in to Athenaeum':'Create my account';
+    swap.textContent=m==='in'?'Create one free':'Sign in instead';
+    swap.parentNode.firstChild.textContent=m==='in'?'Don’t have an account? ':'Already registered? ';
+    swap.dataset.to=m==='in'?'up':'in';
+  }
+  swap.dataset.to='up';
+  tabs.forEach(function(t){t.addEventListener('click',function(){mode(t.dataset.mode)})});
+  swap.addEventListener('click',function(e){e.preventDefault();mode(swap.dataset.to)});
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var f=form.elements,n=f.name.value.trim(),em=f.email.value.trim(),p=f.phone.value.trim();
+    if(!n||!/^\S+@\S+\.\S+$/.test(em)||p.replace(/\D/g,'').length<7){st.textContent='Please enter a valid name, email and phone number.';return}
+    st.textContent='Welcome, '+n.split(' ')[0]+'! Opening your dashboard…';sessionStorageSafe(n);setTimeout(function(){location.hash='#dashboard'},700);
+  });
+})();
+</script>
+
+<div id="app" hidden>
+  <aside class="side">
+    <a class="brand" href="#home"><span class="mark"><svg class="i"><use href="#cube"/></svg></span><span>Athenaeum<small>Build Your Future</small></span></a>
+    <h6>NAVIGATION</h6><nav id="nav"></nav>
+    <div class="foot"><div class="ag"><span class="dot"></span>AI learning assistants</div><p style="margin-top:10px"><a href="#home" style="color:inherit">← Log out</a></p></div>
+  </aside>
+  <div>
+    <div class="top"><input type="search" placeholder="Search paths, skills, milestones…" aria-label="Search"><span class="pill" id="clock"></span><span class="pill">🎯 Career goal: Full Stack Developer</span><span class="sp"></span>
+      <div class="who"><i id="ini">A</i><span id="uname">Arjun S.<small>Student Engineer</small></span></div></div>
+    <main class="view" id="view" style="display:flex"></main>
+  </div>
+</div>
+<script>
+(function(){
+var NAV=[['dashboard','Dashboard'],['profile','My Profile'],['skills','Skill Analysis'],['matching','Career Matching'],['roadmap','Learning Roadmap'],['recommendations','Recommendations'],['progress','Progress Tracking'],['assessments','Assessments'],['mentor','AI Mentor'],['agents','Agent Activity']];
+var $=function(i){return document.getElementById(i)};
+function pb(l,v,c){return '<div class="row"><span>'+l+'</span><span>'+v+'%</span></div><div class="pb '+(c||'')+'"><i style="width:'+v+'%"></i></div>'}
+function li(a,b,c){return '<div class="li"><div><b>'+a+'</b><span>'+b+'</span></div>'+(c?'<em>'+c+'</em>':'')+'</div>'}
+function cd(h,body,k,x){return '<section class="cd '+(x||'')+'">'+(k?'<div class="k">'+k+'</div>':'')+'<h3>'+h+'</h3>'+body+'</section>'}
+function head(t,s){return '<div><h2>'+t+'</h2><p class="sub">'+s+'</p></div>'}
+var D=function(){return '<div class="banner"><div><div class="k" style="color:var(--primary)">ADAPTIVE INSIGHT · YOUR LEARNING OVERVIEW</div><p>React milestone pending. Complete <b>JavaScript Async assessment</b> to unlock Next.js &amp; Full-Stack architecture pipeline.</p></div><a class="btn2" href="#roadmap">Resume Learning →</a></div>'
++'<div class="cols">'+cd('Welcome back, '+(window.__user?window.__user.split(' ')[0]:'Arjun')+' 👋','<p>Your 7 AI Agents analyzed your recent code submits &amp; telemetry. You are <b>42% career-ready</b> with 3 core skill gaps identified before enterprise deployment.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn2" href="#roadmap">▶ Continue JavaScript Milestone</a><a class="btn2 ghost" href="#mentor">Ask AI Mentor</a></div>','Target Goal: Full Stack Developer · Personalized learning support','navy span2')
++cd('Career Readiness','<div class="big" style="--v:42"><div><span>42%<small>READINESS</small></span></div></div>'+pb('Technical Competency',54)+pb('Problem Solving &amp; Algorithmic',48)+pb('System Architecture',20))+'</div>'
++'<div class="cols">'+cd('Weekly Momentum','<div class="tiles"><div>4/8<small>Milestones Met</small></div><div>18h<small>This Week</small></div><div>12🔥<small>Day Streak</small></div></div><div class="row" style="margin-top:8px"><span>7-Day Coding Velocity</span><span style="color:var(--primary)">Avg 2.6h/day</span></div>'+['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(function(d,i){var h=[40,65,50,30,80,95,20][i];return '<div class="row"><span style="width:34px">'+d+'</span><div class="pb" style="flex:1"><i style="width:'+h+'%"></i></div></div>'}).join(''),'Velocity Tracker')
++cd('Target Skill Gaps','<div class="k">Acquired</div><div><span class="chip">Python 3.12 · Strong</span><span class="chip">PostgreSQL / SQL · Mid</span><span class="chip">HTML5 &amp; CSS3 · Core</span></div><div class="k">Missing (priority)</div><div><span class="chip">JavaScript ES6+ Async · High</span><span class="chip">React 19 &amp; State Hooks · Stage 2</span><span class="chip">Node.js &amp; Express · Stage 3</span></div><a href="#skills" style="color:var(--primary);font:700 12px sans-serif">Detailed Matrix →</a>','Differential Analysis · Agent #2')
++cd('Assessment Mastery',pb('Python Advanced Algorithms',88,'g')+pb('Relational Queries &amp; SQL Schema',72)+pb('HTML5 / Responsive Semantics',65)+pb('JavaScript Baseline (Needs Work)',40,'r')+'<a href="#assessments" style="color:var(--primary);font:700 12px sans-serif">Take Test →</a>','Verified Benchmarks')+'</div>'
++'<div class="cols">'+cd('Mastering Asynchronous JavaScript','<p>Promises, Event Loop &amp; async/await concurrency patterns. Build an API rate-limiter in the interactive code sandbox.</p><div><span class="chip">Live Node.js</span><span class="chip">AI Code Review</span><span class="chip">+120 XP</span></div><div><a class="btn2" href="#assessments">Start Lesson Now →</a></div>','Recommended Next Activity · 45 mins · Intermediate','navy span2')
++cd('Live Agent Orchestration',AG(),'Real-time Feed')+'</div>'};
+function AG(){return li('Roadmap Agent','Updated Milestone #4 prerequisite criteria based on recent submissions.','3m ago')+li('Skill Agent','Detected SQL proficiency bump (+8%) from schema design challenge.','24m ago')+li('AI Mentor Agent','Prepared 3 custom behavioral &amp; system mock interview questions.','1h ago')+li('Market Alignment Agent','Ingested 1,240 Bangalore tech job descriptions for Full-Stack relevance weights.','3h ago')}
+var P={
+profile:function(){return head('My Profile','Calibrate your dynamic learning profile')+'<div class="cols">'+cd('Core Details',li('Full Legal Name','Arjun Sharma')+li('University &amp; Program','Stanford University · B.S. Computer Science')+li('Target Role','Full Stack Developer')+li('Commitment','18 hours / week'))+cd('Verified Credentials','<span class="chip">Python 3.12</span><span class="chip">PostgreSQL</span><span class="chip">HTML5 &amp; CSS3</span><p class="sub">Skills verified dynamically by AI agents.</p>')+'</div>'},
+skills:function(){return head('Skill Analysis','Differential analysis by Skill Gap Agent #2')+'<div class="cols">'+cd('Competency Matrix',pb('Python 3.12',92,'g')+pb('PostgreSQL / SQL',72)+pb('HTML5 &amp; CSS3',65)+pb('JavaScript ES6+ Async',40,'r')+pb('React 19 &amp; State Hooks',30,'r')+pb('Node.js &amp; Express',15,'r'))+cd('Priority Gaps',li('JavaScript ES6+ Async','Vital for non-blocking APIs','High')+li('React 19 &amp; State Hooks','Component state architecture','Stage 2')+li('Node.js &amp; Express','Server-side architecture','Stage 3'))+'</div>'},
+matching:function(){return head('Career Matching','Roles aligned to your verified skill profile')+'<div class="cols">'+cd('Top Matches',pb('Full Stack Developer',78)+pb('Backend Engineer',71)+pb('Frontend Engineer',66)+pb('Data Engineer',58))+cd('Market Signal',li('Bangalore','1,240 Full-Stack descriptions ingested','Live')+li('Remote','Strong demand for React + Node','Rising'))+'</div>'},
+roadmap:function(){return head('Learning Roadmap','Interactive timeline for Full Stack Developer')+cd('Milestones',li('1 · JavaScript Fundamentals','Prototypes, Event Loop, Closures','✓ Done')+li('2 · Async JavaScript','Promises, async/await, concurrency','In progress')+li('3 · React 19','Component Lifecycle, Custom Hooks','Locked')+li('4 · Node.js &amp; Express','App router mechanics, caching','Locked')+li('5 · AI Integration &amp; Autonomous Agents','Tooling and orchestration','Locked'))},
+recommendations:function(){return head('Recommendations','Curated by your Roadmap and Skill agents')+'<div class="cols">'+cd('Mastering Asynchronous JavaScript','<p class="sub">Promises, Event Loop &amp; async/await · 45 mins</p><a class="btn2" href="#assessments">Start →</a>')+cd('MDN Deep Dive: JavaScript Event Loop','<p class="sub">Reading · 20 mins · Beginner</p>')+cd('Interactive Promise &amp; Async Lab','<p class="sub">Sandbox · 30 mins · Intermediate</p>')+'</div>'},
+progress:function(){return head('Progress Tracking','Velocity, heatmap and growth curves')+'<div class="cols">'+cd('Roadmap Completion','<div class="big" style="--v:68.7"><div><span>68.7%<small>COMPLETE</small></span></div></div>')+cd('Highlights','<div class="tiles"><div>12🔥<small>Day Streak</small></div><div>86h<small>Coding Hours</small></div><div>8<small>To Certify</small></div></div>')+cd('Competency Checklist',pb('Python',92,'g')+pb('SQL',72)+pb('HTML/CSS',65)+pb('JavaScript',40,'r'))+'</div>'},
+assessments:function(){return head('Assessments','Verified benchmarks and the live coding sandbox')+'<div class="cols">'+cd('Benchmarks',pb('Python Advanced Algorithms',88,'g')+pb('Relational Queries &amp; SQL Schema',72)+pb('HTML5 / Responsive Semantics',65)+pb('JavaScript Baseline',40,'r'),'Last test taken 2 days ago')+cd('Exercise: API Rate-Limiter','<p class="sub">Build it with Promises and async/await, then run the test suite.</p><textarea style="width:100%;min-height:140px;border-radius:12px;border:1px solid var(--line);background:var(--solid);color:var(--ink);padding:12px;font:12px monospace">async function limit(fn, ms) {\n  // your code\n}</textarea><button class="btn2" onclick="this.textContent=\'✓ 3 / 5 tests passed\'">Run Tests</button>')+'</div>'},
+agents:function(){return head('Agent Activity','Live multi-agent orchestration feed')+cd('Live Feed',AG(),'All Your learning assistants are ready')},
+mentor:function(){return head('AI Mentor','Agent #6 · Socratic coding guidance')+cd('Chat','<div class="chat" id="chat"><div class="msg">Hey Arjun! Notice how async functions return promises. What do you expect <code>await</code> to do inside a loop?</div></div><div class="send"><input id="q" placeholder="Ask your mentor…" aria-label="Message"><button class="btn2" id="go">Send</button></div>')}
+};
+function bindMentor(){var c=$('chat');if(!c)return;function go(){var q=$('q'),v=q.value.trim();if(!v)return;c.insertAdjacentHTML('beforeend','<div class="msg me"></div>');c.lastChild.textContent=v;q.value='';setTimeout(function(){c.insertAdjacentHTML('beforeend','<div class="msg">Good question. Try tracing the event loop step by step: what runs first, the sync code or the microtask queue?</div>')},500)}$('go').onclick=go;$('q').onkeydown=function(e){if(e.key==='Enter')go()}}
+function route(){
+  var h=(location.hash||'#home').slice(1);
+  var inApp=h!=='home'&&(h==='dashboard'||P[h]);
+  $('home').hidden=inApp;$('app').hidden=!inApp;
+  if(!inApp){return}
+  $('nav').innerHTML=NAV.map(function(n){return '<a href="#'+n[0]+'"'+(n[0]===h?' class="on"':'')+'>'+n[1]+(n[0]==='mentor'?'<span class="tag" style="background:#eff6ff;color:#0051d5;border-color:#bfd2f8">7 Agents</span>':'')+'</a>'}).join('');
+  $('view').innerHTML=h==='dashboard'?D():P[h]();
+  if(window.__user){$('ini').textContent=window.__user[0].toUpperCase();$('uname').firstChild.textContent=window.__user.split(' ')[0]+' '}
+  if(h==='mentor')bindMentor();
+  window.scrollTo(0,0);
+}
+function tick(){var c=$('clock');if(c)c.textContent=new Date().toLocaleString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}
+window.addEventListener('hashchange',route);setInterval(tick,30000);tick();route();
+})();
+</script>
+</body>
+</html>
